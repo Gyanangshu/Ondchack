@@ -14,8 +14,8 @@ const Category = () => {
   const [category, setCategory] = useState("");
   const [apiCategoryData, setApiCategoryData] = useState([])
 
-  console.log(category)
-  console.log(apiCategoryData)
+  // console.log(category)
+  // console.log(apiCategoryData)
 
   const categories = [
     "Electronics",
@@ -49,7 +49,7 @@ const Category = () => {
       setApiCategoryData(response.data)
 
     } catch (err) {
-      console.log(err.response)
+      // console.log(err.response)
     }
   }
 

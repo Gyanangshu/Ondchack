@@ -16,10 +16,10 @@ const PincodeMenu = () => {
   const [isValue, setIsValue] = useState("");
   const [isEvent, setIsEvent] = useState("");
 
-  console.log(pincode)
-  console.log(isValue)
-  console.log(isEvent)
-  console.log(apiPincodeData)
+  // console.log(pincode)
+  // console.log(isValue)
+  // console.log(isEvent)
+  // console.log(apiPincodeData)
 
   const event_types = [
     "search",
@@ -56,7 +56,7 @@ const PincodeMenu = () => {
       setApiPincodeData(response.data)
 
     } catch (err) {
-      console.log(err)
+      // console.log(err)
     }
   };
 
