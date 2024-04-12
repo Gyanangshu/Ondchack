@@ -1,0 +1,250 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    box-sizing: border-box;
+  }
+  
+  
+  body{
+      font-family: sans-serif;
+  }
+  
+  html{
+      scroll-behavior: smooth;
+  }
+  
+  select{
+      border: 2px solid #1f78be;
+      padding: 10px;
+      border-radius: 10px;
+      outline: none;
+  }
+  
+  /*------------- seller.css --------------*/
+
+  .seller-heading{
+      text-align: center;
+      font-size: 3.5rem;
+      color: #1f78be;
+  
+  }
+  
+  .select-heading-container{
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 1rem;
+      margin-top: 2rem;
+  }
+  
+  .select-heading{
+      font-size: 1.3rem;
+      color: #f26522;
+      font-weight: semi-bold;
+      padding: 0.7rem;
+      border-radius: 8px;
+      border: 1px solid #f26522;
+      cursor: pointer;
+  }
+  
+  .select-heading-active{
+      font-size: 1.3rem;
+      font-weight: semi-bold;
+      padding: 0.7rem;
+      border-radius: 8px;
+      color: white;
+      background-color: #f26522;
+      cursor: pointer;
+  }
+  
+  .select-heading:hover{
+      color: white;
+      background-color: #f26522;
+      transition: 0.2s all ease-in-out;
+  }
+  
+  .info-container{
+      display: grid;
+      grid-template-columns: repeat(1, 1fr);
+      gap: 2rem 2.5rem;
+      justify-items: center;
+      margin-top: 3rem;
+  }
+  
+  .form{
+      display: flex;
+      align-items: center;
+      flex-direction: column;
+      gap: 2rem;
+      padding-top: 4rem;
+  }
+  
+  .form-container{
+      display: flex;
+      width: 100%;
+      gap: 2.5rem;
+  }
+  
+  .form-input-containers{
+      display: flex;
+      flex-direction: column;
+      flex-grow: 1;
+      width: 100%;
+      position: relative;
+  }
+  
+  
+  .form-input-containers input{
+      width: 100%;
+      padding: 10px;
+      border-radius: 10px;
+      outline: none;
+      border-color: #1f78be;
+      
+  }
+  
+  .input-label{
+      font-size: 0.8rem;
+      left: 10px;
+      font-weight: 600;
+      background: white;
+      width: fit-content;
+      padding-inline: 3px;
+  }
+  
+  .form-button{
+      width: fit-content;
+      padding: 0.67rem 2.5rem;
+      border-radius: 16px;
+      font-size: 1.1rem;
+      color: #fff;
+      border: 1px solid transparent;
+      transition: all 0.5s;
+      font-weight: 600;
+      background: #1f78be;
+  }
+
+  .form-button2{
+      width: 100%;
+      padding: 0.67rem 2.5rem;
+      border-radius: 16px;
+      font-size: 1.1rem;
+      color: #fff;
+      border: 1px solid transparent;
+      transition: all 0.5s;
+      font-weight: 600;
+      background: #1f78be;
+  }
+  
+  .form-button:hover{
+      background: #418fc7 ;
+      cursor: pointer;
+  }
+  
+  .pincode-container{
+      border: 2px solid #1f78be;
+      border-radius: 12px;
+      width: 100%;
+  }
+  
+  .pincode-headings-container{
+      border-bottom: 2px solid #1f78be;
+      background-color: rgb(226, 247, 253);
+      border-top-left-radius: 12px;
+      border-top-right-radius: 12px;
+  }
+  
+  .pincode-headings{
+      color: #0462ab;
+      font-size: 1.8rem;
+      text-transform: capitalize;
+      text-align: center;
+      padding: 15px
+  }
+  
+  .card-container{
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+      padding: 1rem;
+  }
+
+  .pincode-product{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  
+  .product-name{
+      font-size: 1.5rem;
+      text-decoration: underline;
+      margin-top: 0.8rem;
+  }
+  
+  /* .card-info{
+      display: grid;
+      grid-template-columns: repeat(1, 1fr);
+      gap: 0.5rem;
+      margin-inline: 3rem;
+      text-transform: capitalize;
+      font-weight: normal;
+      font-size: 1.1rem;
+      margin-top: 0.8rem;
+      margin-bottom: 1rem;
+  } */
+
+  .pincode-input{
+    width: 100%;
+    font-size: 1.2rem;
+  }
+
+  /* --------- Category css ------------ */
+  .category-container{
+    margin-top: 3rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .category-input-container{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .input{
+    width: 50%;
+    font-size: 1.2rem;
+    border: 2px solid #1f78be;
+  }
+
+  .category-action{
+    font-size: 1.5rem;
+    text-transform: capitalize;
+    text-decoration: underline;
+  }
+
+  .category-product-name{
+    padding-bottom: 1.5rem;
+    font-size: 1.2rem;
+  }
+
+  .category-action-container{
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+  }
+
+  .category-product-item{
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .category-card-container{
+    padding: 2rem;
+  }
