@@ -40,7 +40,7 @@ const PincodeMenu = () => {
   const handlePincodeAPI = async () => {
 
     try {
-      const response = await axios.post("http://ondc.axai.ai/v1/ondc/insight", {
+      const response = await axios.post("https://ondc.axai.ai/v1/ondc/insight", {
         pincode: pincode,
         event: isEvent,
         value: isValue,

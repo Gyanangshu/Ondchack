@@ -33,7 +33,7 @@ const Category = () => {
   const handleCategoryAPI = async () => {
 
     try {
-      const response = await axios.post("http://ondc.axai.ai/v1/ondc/insight", {
+      const response = await axios.post("https://ondc.axai.ai/v1/ondc/insight", {
         pincode: "",
         event: "",
         value: "",
@@ -78,7 +78,7 @@ const Category = () => {
           <div className='pt-6'>
             <Charts />
           </div>
-          
+
           <div className="info-container">
             <Swiper
               modules={[Pagination]}
