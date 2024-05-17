@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import PincodeMenu from "./PincodeMenu";
 import CategoryMenu from "./Category";
-import LogoutIcon from "../Images/logout-icon.svg"
+import LogoutIcon from "../Images/logout-icon.svg";
 import NavLogo from "../Images/navLogo.png";
 import UsersMenu from "../Images/users-menu.svg";
 // import Seller from '../Seller';
@@ -15,7 +15,7 @@ const Dashboard = () => {
 
     const [activeMenu, setActiveMenu] = useState('Home');
     const [collapseMenu, setCollapseMenu] = useState(true);
-    const [data, setData] = useState([])
+    const [data, setData] = useState([]);
 
     const { logOut, user } = UserAuth();
 

@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
-
-import DownIcon from "../Images/down-arrow.svg";
 import { Link } from 'react-router-dom';
+import NavLogo from "../Images/navLogo.png";
 
 const Navbar = () => {
 
@@ -21,7 +20,7 @@ const Navbar = () => {
   return (
     <nav className='px-mobile xl:px-xlarge lg:px-large 2xl:max-w-[1440px] 2xl:mx-auto'>
       <div className='flex items-center justify-between border-b-2 border-[#F2F4F7] py-5 transition-all duration-400 ease-in-out'>
-       
+       <img className='h-10' src={NavLogo} alt="axai" />
 
 
         {navCollapse ?

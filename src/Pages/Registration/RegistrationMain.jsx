@@ -4,6 +4,7 @@ import { UserAuth } from '../../Context/AuthContext';
 import Google from "../../Images/googleLogo.svg";
 import Button from '../../UI/Button';
 import { Link, useNavigate } from 'react-router-dom';
+import NavLogo from "../../Images/navLogo.png";
 
 const RegistrationMain = () => {
 
@@ -29,7 +30,7 @@ const RegistrationMain = () => {
             <div className='w-fit mx-auto flex flex-col items-center bg-white border border-gray-200 shadow-2xl shadow-blue-300 p-8 rounded-xl gap-14'>
                 <div className='flex flex-col items-center gap-6'>
                     <Link to={"/"}>
-                       
+                       <img className='h-10' src={NavLogo} alt="axai" />
                     </Link>
                     <p className='text-Heading font-medium text-xl'>Welcome! Please sign in to continue</p>
                 </div>
