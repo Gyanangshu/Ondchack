@@ -9,7 +9,7 @@ const Protected = ({ children }) => {
 
     useEffect(() => {
         if (!user) {
-            return nav('/')
+            return nav('/registration')
         }
     }, [user])
 

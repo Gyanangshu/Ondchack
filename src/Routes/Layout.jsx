@@ -9,11 +9,11 @@ const Layout = () => {
     const { user } = UserAuth();
     const navigate = useNavigate();
 
-    useEffect(() => {
-        if (user) {
-            navigate('/dashboard');
-        }
-    }, [user])
+    // useEffect(() => {
+    //     if (user) {
+    //         navigate('/dashboard');
+    //     }
+    // }, [user])
 
     return (
         <div>
