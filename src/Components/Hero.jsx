@@ -14,13 +14,13 @@ const Hero = () => {
       </div>
 
       <div className='flex items-center justify-center gap-3 py-12'>
-        <button className='rounded-lg py-3 px-4 font-semibold text-lg flex items-center gap-1 border border-[#D0D5DD]'>
-          <img src={PauseIcon} alt="pause" />
+        <button className='rounded-lg py-3 px-4 font-semibold flex items-center gap-1 border border-[#D0D5DD]'>
+          <img className='h-5 ' src={PauseIcon} alt="pause" />
           <p>Demo</p>
         </button>
 
         <Link to={'/registration'}>
-          <Button style={"rounded-lg text-white bg-[#7F56D9] py-4 px-7 font-semibold "} text={"Sign up"} />
+          <Button style={"rounded-lg text-white bg-[#7F56D9] py-3 px-7 font-semibold"} text={"Sign up"} />
         </Link>
       </div>
 

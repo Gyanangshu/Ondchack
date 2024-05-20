@@ -13,8 +13,7 @@ import UploadPic from "../Images/upload-pic.svg";
 const Profile = () => {
 
   const { user } = UserAuth()
-  console.log(user)
-
+  
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
   const [email, setEmail] = useState('');
@@ -164,7 +163,7 @@ const Profile = () => {
                     </div>
                     <div>
                       <h1 className='text-3xl font-medium'>{item?.firstName || user?.displayName || "User"}</h1>
-                      <p className='text-[#667085] text-center md:text-left'>@{item?.firstName || user?.email || "user"}</p>
+                      <p className='text-[#667085] text-center md:text-left'>@{item?.firstName || user?.displayName || "user"}</p>
                     </div>
                   </div>
 

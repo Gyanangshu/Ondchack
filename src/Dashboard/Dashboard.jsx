@@ -108,11 +108,11 @@ const Dashboard = () => {
     return (
         <section className='flex relative h-screen'>
             {collapseMenu ?
-                <div className='md:w-96 w-[40rem] bg-[#1E232F] pt-4 pb-1 px-4 h-full flex flex-col justify-between transition-all duration-300 ease-in-out'>
+                <div className='md:w-1/4 w-[96rem] bg-[#1E232F] pt-4 pb-1 px-4 h-full flex flex-col justify-between transition-all duration-300 ease-in-out'>
                     <div className='flex flex-col items-end w-full gap-5'>
                         <div className='flex justify-between md:justify-center items-center w-full'>
                             <div className='bg-white p-2 rounded-lg md:w-full flex justify-center'>
-                                <img className='h-12 ' src={NavLogo} alt="" />
+                                <img className='h-12 ' src={NavLogo} alt="axai" />
                             </div>
 
                             <svg onClick={() => setCollapseMenu(!collapseMenu)} xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="white" className="w-6 h-6 relative mb-4 block md:hidden">
@@ -142,7 +142,7 @@ const Dashboard = () => {
                         </ul>
 
                         {[data].map((item) => (
-                            <div className='pl-1 py-4 border-t border-[#475467] flex justify-between items-center flex-wrap'>
+                            <div className='pl-1 py-4 border-t border-[#475467] flex justify-between items-center flex-wrap gap-2'>
                                 <div className='flex gap-3 items-center'>
                                     <div className=''>
                                         <img className='h-10 w-10 rounded-full' src={item?.ImgURL || user?.photoURL} alt="user" />
@@ -163,10 +163,38 @@ const Dashboard = () => {
                 </div>
 
                 :
-                <div className='w-10 pl-2 pt-4 bg-[#1E232F] transition-all duration-300 ease-in-out'>
-                    <svg onClick={() => setCollapseMenu(!collapseMenu)} xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="white" className="w-6 h-6 mr-4 relative">
+                <div className='w-12 pt-6 bg-[#1E232F] transition-all duration-300 ease-in-out flex flex-col items-center gap-10'>
+                    <svg onClick={() => setCollapseMenu(!collapseMenu)} xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="white" className="w-6 h-6 relative">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
                     </svg>
+
+                    <div className='flex flex-col justify-between h-full'>
+                        <ul className='list-none text-white cursor-pointer flex flex-col gap-4 w-fit '>
+                            {MenuOptions.map((item, index) => (
+                                <li onClick={() => handleSidebar(item.OptionName)} key={index} className={`hover:transition-all duration-300 ease-in-out rounded-lg flex items-center gap-3 ${activeMenu === item.OptionName ? 'bg-[#3a5997] py-3 px-4' : 'py-3 px-4'}`}>
+                                    {item.optionIcon}
+                                </li>
+                            ))}
+                        </ul>
+                        <div className='flex flex-col gap-3'>
+                            <ul className='list-none text-white cursor-pointer flex flex-col gap-4'>
+                                {MenuBottomOptions.map((item, index) => (
+                                    <li key={index} onClick={() => handleSidebar(item.optionBottomName)} className={`flex items-center gap-3 px-3 py-3 rounded-xl hover:transition-all delay-75 ease-in-out ${activeMenu === item.optionBottomName ? 'bg-[#3a5997] py-3 px-4' : 'py-3 px-4'}`}>
+                                        <img src={item.optionBottomIcon} alt="icon" />
+                                    </li>
+                                ))}
+
+                            </ul>
+
+                            {[data].map((item) => (
+                                <div className='py-4 border-t border-[#475467] w-fit mx-auto'>
+                                    <img className='h-10 w-10 rounded-full ' src={item?.ImgURL || user?.photoURL} alt="user" />
+                                </div>
+                            ))}
+                        </div>
+                    </div>
+
+
                 </div>
             }
 
