@@ -9,8 +9,16 @@ const Hero = () => {
     <section className=''>
       {/* heading */}
       <div className='flex flex-col items-center justify-center gap-6'>
-        <h1 className='font-semibold text-6xl text-Heading text-center'>Beautiful analytics to grow smarter</h1>
-        <p className='text-SubGray text-xl max-w-[768px] text-center'>Powerful, self-serve product and growth analytics to help you convert, engage, and retain more users. Trusted by over 4,000 startups.</p>
+        <div className='flex items-center gap-3 text-[#4285F4] font-semibold bg-[#F0F6FF] py-1 px-2 rounded-3xl'>
+          <p className='py-1 px-2 bg-white rounded-2xl'>New Feature</p>
+          <p className='flex items-center gap-2'>Check out the Copilot
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="3" stroke="currentColor" className="w-4 h-4">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3" />
+            </svg>
+          </p>
+        </div>
+        <h1 className='font-semibold text-6xl text-Heading text-center'>Harness the Power of AI-Driven Analytics</h1>
+        <p className='text-SubGray text-xl max-w-[768px] text-center'>Unlock powerful, self-service product and growth analytics to boost conversion, engagement, and user retention. Experience unparalleled personalization with AI-driven insights, tailored strategies, and intelligent recommendations.</p>
       </div>
 
       <div className='flex items-center justify-center gap-3 py-12'>
@@ -20,7 +28,7 @@ const Hero = () => {
         </button>
 
         <Link to={'/registration'}>
-          <Button style={"rounded-lg text-white bg-[#7F56D9] py-3 px-7 font-semibold"} text={"Sign up"} />
+          <Button style={"rounded-lg text-white bg-[#4285F4] py-3 px-7 font-semibold"} text={"Sign up"} />
         </Link>
       </div>
 

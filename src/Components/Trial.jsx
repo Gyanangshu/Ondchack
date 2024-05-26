@@ -7,7 +7,7 @@ const Trial = () => {
             <div className='flex flex-col items-center bg-[#F9FAFB] py-12 rounded-lg'>
                 <h1 className='text-Heading text-4xl font-semibold text-center'>Start your free trial</h1>
                 <p className='text-SubGray text-xl pb-10 pt-5 text-center'>Join over 4,000+ startups already growing with Untitled.</p>
-                <Button style={"py-3 px-5 bg-[#7F56D9] text-white font-semibold rounded-lg"} text={"Get Started"} />
+                <Button style={"py-3 px-5 text-white font-semibold rounded-lg"} text={"Get Started"} />
             </div>
         </section>
     )

@@ -11,12 +11,12 @@ const LandingHome = () => {
   return (
     <div className='px-mobile xl:px-xlarge lg:px-large 2xl:max-w-[1440px] 2xl:mx-auto lg:py-24 py-16'>
       <Hero />
-      <Companies />
+      {/* <Companies /> */}
       <Features />
-      <Testimonial />
+      {/* <Testimonial /> */}
       <Faq />
-      <Services />
-      <Trial />
+      {/* <Services /> */}
+      {/* <Trial /> */}
     </div>
   )
 }

@@ -1,19 +1,5 @@
-<svg width="64" height="64" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
-<g filter="url(#filter0_d_250_1012)">
-<rect x="8" y="4" width="48" height="48" rx="24" fill="#F4EBFF" shape-rendering="crispEdges"/>
-<rect x="8" y="4" width="48" height="48" rx="24" stroke="#F9F5FF" stroke-width="8" shape-rendering="crispEdges"/>
-<path d="M41 27.5C41.0034 28.8199 40.6951 30.1219 40.1 31.3C39.3944 32.7118 38.3098 33.8992 36.9674 34.7293C35.6251 35.5594 34.0782 35.9994 32.5 36C31.1801 36.0035 29.8781 35.6951 28.7 35.1L23 37L24.9 31.3C24.3049 30.1219 23.9966 28.8199 24 27.5C24.0006 25.9218 24.4406 24.3749 25.2707 23.0326C26.1008 21.6903 27.2883 20.6056 28.7 19.9C29.8781 19.305 31.1801 18.9966 32.5 19H33C35.0843 19.115 37.053 19.9948 38.5291 21.4709C40.0052 22.947 40.885 24.9157 41 27V27.5Z" stroke="#7F56D9" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-</g>
-<defs>
-<filter id="filter0_d_250_1012" x="0" y="0" width="64" height="64" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
-<feFlood flood-opacity="0" result="BackgroundImageFix"/>
-<feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"/>
-<feOffset dy="4"/>
-<feGaussianBlur stdDeviation="2"/>
-<feComposite in2="hardAlpha" operator="out"/>
-<feColorMatrix type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.25 0"/>
-<feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow_250_1012"/>
-<feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow_250_1012" result="shape"/>
-</filter>
-</defs>
+<svg width="56" height="57" viewBox="0 0 56 57" fill="none" xmlns="http://www.w3.org/2000/svg">
+<rect x="4" y="4.73438" width="48" height="48" rx="24" fill="#DFEBFF"/>
+<rect x="4" y="4.73438" width="48" height="48" rx="24" stroke="#F1F6FF" stroke-width="8"/>
+<path d="M37 28.2344C37.0034 29.5543 36.6951 30.8563 36.1 32.0344C35.3944 33.4461 34.3098 34.6336 32.9674 35.4637C31.6251 36.2938 30.0782 36.7338 28.5 36.7344C27.1801 36.7378 25.8781 36.4295 24.7 35.8344L19 37.7344L20.9 32.0344C20.3049 30.8563 19.9966 29.5543 20 28.2344C20.0006 26.6562 20.4406 25.1093 21.2707 23.767C22.1008 22.4247 23.2883 21.34 24.7 20.6344C25.8781 20.0393 27.1801 19.731 28.5 19.7344H29C31.0843 19.8494 33.053 20.7292 34.5291 22.2053C36.0052 23.6814 36.885 25.6501 37 27.7344V28.2344Z" stroke="#4285F4" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
 </svg>

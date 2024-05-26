@@ -20,8 +20,9 @@ const Navbar = () => {
   return (
     <nav className='px-mobile xl:px-xlarge lg:px-large 2xl:max-w-[1440px] 2xl:mx-auto'>
       <div className='flex items-center justify-between border-b-2 border-[#F2F4F7] py-5 transition-all duration-400 ease-in-out'>
-       <img className='h-10' src={NavLogo} alt="axai" />
-
+        <Link to={'/'}>
+          <img className='h-10' src={NavLogo} alt="axai" />
+        </Link>
 
         {navCollapse ?
           <svg onClick={() => setNavCollapse(!navCollapse)} xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.8" stroke="currentColor" className="w-8 h-8 md:hidden block">

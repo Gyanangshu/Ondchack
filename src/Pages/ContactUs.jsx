@@ -258,7 +258,7 @@ const ContactUs = () => {
                 
                 <ToastContainer />
             </form>
-        </section>
+        </section> 
     )
 }
 

@@ -2,33 +2,34 @@ import React from 'react';
 import Accordion from '../UI/Accordion';
 import AvatarGroup from "../Images/avatarGroup.svg";
 import Button from '../UI/Button';
+import { Link } from 'react-router-dom';
 
 const Faq = () => {
 
     const FaqInfo = [
         {
-            question: "Is there a free trial available?",
-            answer: "Yes, you can try us for free for 30 days. If you want, we’ll provide you with a free, personalized 30-minute onboarding call to get you up and running as soon as possible."
+            question: "Can I customize the location-based recommendations?",
+            answer: "Absolutely! Our AI analyzes user data based on their location and generates tailored strategies. You can further customize these recommendations to align with your specific business goals and marketing campaigns."
         },
         {
-            question: "Can I change my plan later?",
-            answer: "Yes, you can try us for free for 30 days. If you want, we’ll provide you with a free, personalized 30-minute onboarding call to get you up and running as soon as possible."
+            question: "What types of data can the LLM interpret?",
+            answer: "Our LLM can interpret a wide range of data, including graphs, charts, and event logs. It presents the information in a conversational manner, making complex data easy to understand and act upon."
         },
         {
-            question: "What is your cancellation policy?",
-            answer: "Yes, you can try us for free for 30 days. If you want, we’ll provide you with a free, personalized 30-minute onboarding call to get you up and running as soon as possible."
+            question: "How can I access my analytics on WhatsApp?",
+            answer: "Simply ask our WhatsApp LLM for your seller dashboard insights. You'll receive real-time updates and analytics directly on your WhatsApp, ensuring you stay informed no matter where you are."
         },
         {
-            question: "Can other info be added to an invoice?",
-            answer: "Yes, you can try us for free for 30 days. If you want, we’ll provide you with a free, personalized 30-minute onboarding call to get you up and running as soon as possible."
+            question: "How do I get started?",
+            answer: "Getting started with Axai is a simple three-step process: a) Sign up on Axai b) Select the products you want and generate a link. c) Embed that link into your videos and start earning."
         },
         {
-            question: "How does billing work?",
-            answer: "Yes, you can try us for free for 30 days. If you want, we’ll provide you with a free, personalized 30-minute onboarding call to get you up and running as soon as possible."
+            question: "What is the commission that I can earn?",
+            answer: "The commission varies by category but typically ranges between 2-15%."
         },
         {
-            question: "How do I change my account email?",
-            answer: "Yes, you can try us for free for 30 days. If you want, we’ll provide you with a free, personalized 30-minute onboarding call to get you up and running as soon as possible."
+            question: "Can I list my own brands?",
+            answer: "Certainly! Just reach out to us, and we will assist you with the listing process."
         },
     ]
 
@@ -55,7 +56,10 @@ const Faq = () => {
                     <p className='text-Heading text-xl font-medium text-center'>Still have questions?</p>
                     <p className='text-SubGray text-lg text-center'>Can’t find the answer you’re looking for? Please chat to our friendly team.</p>
                 </div>
-                <Button style={"rounded-lg text-white bg-[#7F56D9] py-[10px] px-[18px] font-semibold text-lg"} text={"Get in touch"} />
+                
+                <Link to={'/contact'}>
+                <Button style={"rounded-lg text-white py-[10px] px-[18px] font-semibold text-lg"} text={"Get in touch"} />
+                </Link>
             </div>
 
         </section>
