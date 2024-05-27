@@ -33,7 +33,7 @@ const Category = () => {
     setOpenDropdown(null);
   };
 
-  console.log(selectedOptions)
+  // console.log(selectedOptions)
 
   const handleDelete = (dropdown) => {
     setSelectedOptions({ [dropdown]: null });
@@ -58,7 +58,7 @@ const Category = () => {
       })
       setApiCategoryData(response.data)
     } catch (err) {
-      console.log(err.response)
+      // console.log(err.response)
     } finally {
       setIsLoading(false)
     }
@@ -81,10 +81,10 @@ const Category = () => {
         }
       })
       setCopilotData(response.data)
-      console.log("APi is running")
+      // console.log("APi is running")
 
     } catch (err) {
-      console.log(err.response)
+      // console.log(err.response)
     } finally {
       setIsPilotLoading(false)
     }
@@ -95,7 +95,7 @@ const Category = () => {
     handleCopilotApi(); // Call the API when the form is submitted
   };
 
-  console.log("Trend data", apiCategoryData);
+  // console.log("Trend data", apiCategoryData);
 
   const AgentNavigation = [
     {
@@ -130,7 +130,7 @@ const Category = () => {
 
 
   const seriesNumber = apiCategoryData?.trend_analysis?.search;
-  console.log("searchSeries", seriesNumber)
+  // console.log("searchSeries", seriesNumber)
 
   const seriesCart = apiCategoryData?.trend_analysis?.add_to_cart;
   const seriesWishlist = apiCategoryData?.trend_analysis?.add_to_wishlist;
@@ -204,17 +204,17 @@ const Category = () => {
             :
             <div>
               {copilotData?.llm_output ?
-                <div className='bg-white w-full py-4 px-6 rounded-lg'>
+                <div className='bg-white w-full py-4 px-6 rounded-lg border-2 border-blue-200 shadow-sm shadow-blue-200'>
                   <p className='text-lg'>{copilotData?.llm_output?.justification}</p>
-                  <div className='py-2 flex items-center gap-4'>
-                    <div className='border-2 border-gray-200 py-2 px-3 w-fit'>
+                  <div className='py-2 my-5 flex items-center gap-4'>
+                    <div className='border-2 border-gray-200 py-2 pl-4 pr-16 rounded-lg w-fit'>
                       <p className='font-semibold'>Discount</p>
-                      <p className='text-2xl font-semibold pt-3'>{copilotData?.llm_output?.optimal_discount}%</p>
+                      <p className='text-2xl font-semibold pt-3'>{copilotData?.llm_output?.optimal_discount.toFixed(2)}%</p>
                     </div>
 
-                    <div className='border-2 border-gray-200 py-2 px-3 w-fit'>
+                    <div className='border-2 border-gray-200 py-2 pl-4 pr-16 rounded-lg w-fit'>
                       <p className='font-semibold'>Profit</p>
-                      <p className='text-2xl font-semibold pt-3'>{copilotData?.llm_output?.predicted_profit}%</p>
+                      <p className='text-2xl font-semibold pt-3'>{copilotData?.llm_output?.predicted_profit.toFixed(2)}%</p>
                     </div>
                   </div>
                 </div>
