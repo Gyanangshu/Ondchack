@@ -45,8 +45,8 @@ const Features = () => {
         <section className='py-24 mt-6'>
             <div>
                 <p className='text-[#4285F4] font-semibold text-center'>Features</p>
-                <h1 className='text-4xl font-semibold text-Heading text-center pt-3 pb-5'>Analytics that feels like it’s from the future</h1>
-                <p className='text-[#667085] text-center'>Powerful, self-serve product and growth analytics to help you convert, engage, and retain more users. Trusted by over 4,000 startups.</p>
+                <h1 className='text-4xl font-semibold text-Heading text-center pt-3 pb-5'>Innovative AI Features to Transform Your Business</h1>
+                <p className='text-[#667085] text-center'>Explore our cutting-edge features designed to elevate your business.</p>
             </div>
 
             <div className='grid lg:grid-cols-3 grid-cols-1 gap-16 pt-16 justify-items-center'>

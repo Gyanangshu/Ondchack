@@ -38,7 +38,7 @@ const Faq = () => {
             <div className=' flex justify-center flex-col'>
                 <div className='flex flex-col justify-center items-center gap-5'>
                     <h1 className='text-Heading text-4xl font-semibold text-center'>Frequently asked questions</h1>
-                    <p className='text-SubGray text-xl text-center'>Everything you need to know about the product and billing.</p>
+                    {/* <p className='text-SubGray text-xl text-center'>Everything you need to know about the product and billing.</p> */}
                 </div>
 
                 <div className='pt-16'>
