@@ -1,11 +1,17 @@
-import React from 'react'
+import React from 'react';
 
 const DropdownThree = ({ title, selectedOption, handleSelect, isOpen, setOpenDropdown }) => {
-
     const options = {
-        Source: ["Delhi", "Mumbai", 'Bengaluru', 'Kolkata', 'Hyderabad'],
-        Destination: ["Delhi", "Mumbai", 'Bengaluru', 'Kolkata', 'Hyderabad'],
+        Source: ["Delhi", "Mumbai", 'Bangalore', 'Kolkata', 'Hyderabad'],
+        Destination: ["Delhi", "Mumbai", 'Bangalore', 'Kolkata', 'Hyderabad'],
         Airline: ['Indigo', "Air India", 'SpiceJet', 'Vistara']
+    }[title];
+
+    // List of disabled options
+    const disabledOptions = {
+        Source: ['Kolkata', 'Hyderabad'],
+        Destination: ['Kolkata', 'Hyderabad'],
+        Airline: ['SpiceJet', 'Vistara']
     }[title];
 
     return (
@@ -15,7 +21,7 @@ const DropdownThree = ({ title, selectedOption, handleSelect, isOpen, setOpenDro
                 onClick={() => setOpenDropdown(isOpen ? null : title)}
             >
                 {selectedOption || title}
-                <svg 
+                <svg
                     className={`w-4 h-4 ml-2 transition-transform ${isOpen ? 'transform rotate-180' : ''}`}
                     fill="none"
                     stroke="currentColor"
@@ -27,17 +33,22 @@ const DropdownThree = ({ title, selectedOption, handleSelect, isOpen, setOpenDro
             </div>
             {isOpen && (
                 <div className="absolute w-full right-0 max-h-72 overflow-y-scroll top-full mt-1 bg-white border border-gray-300 rounded shadow-lg z-10">
-                    {options.map((option, index) => (
-                        <div
-                            key={index}
-                            className={`cursor-pointer p-2 hover:bg-blue-500 hover:text-white ${selectedOption === option ? 'bg-blue-500 text-white' : ''}`}
-                            onClick={() => {
-                                handleSelect(option);
-                            }}
-                        >
-                            {option}
-                        </div>
-                    ))}
+                    {options.map((option, index) => {
+                        const isDisabled = disabledOptions.includes(option);
+                        return (
+                            <div
+                                key={index}
+                                className={`cursor-pointer p-2 ${isDisabled ? 'cursor-not-allowed text-gray-400' : 'hover:bg-blue-500 hover:text-white'} ${selectedOption === option ? 'bg-blue-500 text-white' : ''}`}
+                                onClick={() => {
+                                    if (!isDisabled) {
+                                        handleSelect(option);
+                                    }
+                                }}
+                            >
+                                {option}
+                            </div>
+                        );
+                    })}
                 </div>
             )}
         </div>

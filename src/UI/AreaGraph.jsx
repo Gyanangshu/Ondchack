@@ -1,14 +1,14 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import Chart from 'react-apexcharts';
 
-const AreaGraph = () => {
+const AreaGraph = ({ seriesName, seriesData }) => {
     const [chartOptions, setChartOptions] = useState({
-        chart: {
+        chart: { 
             type: 'area',
             height: 350,
             toolbar: {
                 show: false
-              }
+            }
         },
         dataLabels: {
             enabled: false,
@@ -19,38 +19,56 @@ const AreaGraph = () => {
         grid: {
             show: false,
         },
-        yaxis: {
+        // yaxis: {
+        //     title: {
+        //         text: "Flights",
+        //     },
+        //     labels: {
+        //         show: false
+        //     },
+        //     style: {
+        //         fontWeight: 400
+        //     }
+        // },
+        xaxis: {
+            // title: { text: "Month: April - May" },
+            categories: ["week 1", "week 2", "week 3", "week 4", "week 5", "week 6", "week 7", "week 8"],
             labels: {
                 show: false
             }
         },
-        xaxis: {
-            type: 'datetime',
+        // xaxis: {
+        //     labels: {
+        //         show: false
+        //       }
+        // },
+
+        yaxis: {
             labels: {
                 show: false
-            },
-            categories: [
-                '2022-01-01T00:00:00.000Z',
-                '2022-01-02T00:00:00.000Z',
-                '2022-01-03T00:00:00.000Z',
-                '2022-01-04T00:00:00.000Z',
-                '2022-01-05T00:00:00.000Z',
-                '2022-01-06T00:00:00.000Z',
-                '2022-01-07T00:00:00.000Z',
-            ],
-        },
-        tooltip: {
-            enabled: false,
+              }
         },
 
+        tooltip: {
+            enabled: true,
+        },
     });
 
     const [chartSeries, setChartSeries] = useState([
         {
-            name: 'Series 1',
-            data: [31, 40, 28, 51, 42, 109, 100],
-        },
+            name: seriesName,
+            data: seriesData,
+        }
     ]);
+
+    useEffect(() => {
+        setChartSeries([
+            {
+                name: seriesName,
+                data: seriesData,
+            }
+        ]);
+    }, [seriesData, seriesName]);
 
     return (
         <div>

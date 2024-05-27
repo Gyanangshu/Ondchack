@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Table from '../UI/Table'
 import StatBoxes from '../UI/StatBoxes'
 import Charts from '../UI/Charts'
@@ -14,47 +14,37 @@ import Whatsapp from "../Images/whatsapp.svg";
 import Box from '../UI/Box';
 import InsightChart from '../UI/InsightChart';
 import DropdownFour from '../UI/DropdownFour';
+import { Link } from 'react-router-dom';
+import Home from './Home';
 
 const Category = () => {
 
-  const [category, setCategory] = useState("");
+  // const [category, setCategory] = useState("");
   const [apiCategoryData, setApiCategoryData] = useState([])
   const [selectedOptions, setSelectedOptions] = useState({});
   const [openDropdown, setOpenDropdown] = useState(null);
+  const [isLoading, setIsLoading] = useState(false);
 
   const handleSelect = (dropdown, option) => {
     setSelectedOptions({ [dropdown]: option });
     setOpenDropdown(null);
   };
 
+  console.log(selectedOptions)
+
   const handleDelete = (dropdown) => {
     setSelectedOptions({ [dropdown]: null });
   };
-  
-  // console.log(category)
-  // console.log(apiCategoryData)
-
-  const categories = [
-    "Electronics",
-    "Fashion",
-    "Home and Garden",
-    "Health and Beauty",
-    "Sports and Outdoors",
-    "Books and Media",
-    "Toys and Games",
-    "Groceries and Gourmet Food",
-    "Automotive and Industrial",
-    "Office Supplies",
-  ];
 
   const handleCategoryAPI = async () => {
-
+    setIsLoading(true)
     try {
-      const response = await axios.post("https://ondc.axai.ai/v1/ondc/insight", {
-        pincode: "",
-        event: "",
-        value: "",
-        category: category,
+      const response = await axios.post("https://ondcapi.axai.ai/v1/ondc/insight", {
+        source: "",
+        destination: "",
+        carrier: "",
+        event: '',
+        query: ''
 
       }, {
         withCredentials: false,
@@ -64,30 +54,30 @@ const Category = () => {
         }
       })
       setApiCategoryData(response.data)
-
     } catch (err) {
-      // console.log(err.response)
+      console.log(err.response)
+    } finally {
+      setIsLoading(false)
     }
   }
 
-  const handleCategorySubmit = (e) => {
-    e.preventDefault();
-    handleCategoryAPI();
-  };
+  console.log("Trend data", apiCategoryData);
 
   const AgentNavigation = [
     {
       name: 'Marketing Agent',
       icon: <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
         <path d="M15 2.5C14.337 2.5 13.7011 2.76339 13.2322 3.23223C12.7634 3.70107 12.5 4.33696 12.5 5V15C12.5 15.663 12.7634 16.2989 13.2322 16.7678C13.7011 17.2366 14.337 17.5 15 17.5C15.663 17.5 16.2989 17.2366 16.7678 16.7678C17.2366 16.2989 17.5 15.663 17.5 15C17.5 14.337 17.2366 13.7011 16.7678 13.2322C16.2989 12.7634 15.663 12.5 15 12.5H5C4.33696 12.5 3.70107 12.7634 3.23223 13.2322C2.76339 13.7011 2.5 14.337 2.5 15C2.5 15.663 2.76339 16.2989 3.23223 16.7678C3.70107 17.2366 4.33696 17.5 5 17.5C5.66304 17.5 6.29893 17.2366 6.76777 16.7678C7.23661 16.2989 7.5 15.663 7.5 15V5C7.5 4.33696 7.23661 3.70107 6.76777 3.23223C6.29893 2.76339 5.66304 2.5 5 2.5C4.33696 2.5 3.70107 2.76339 3.23223 3.23223C2.76339 3.70107 2.5 4.33696 2.5 5C2.5 5.66304 2.76339 6.29893 3.23223 6.76777C3.70107 7.23661 4.33696 7.5 5 7.5H15C15.663 7.5 16.2989 7.23661 16.7678 6.76777C17.2366 6.29893 17.5 5.66304 17.5 5C17.5 4.33696 17.2366 3.70107 16.7678 3.23223C16.2989 2.76339 15.663 2.5 15 2.5Z" stroke="#344054" stroke-width="1.67" stroke-linecap="round" stroke-linejoin="round" />
-      </svg>
+      </svg>,
+      selected: "No"
     },
 
     {
       name: 'Pricing Agent',
       icon: <svg width="18" height="22" viewBox="0 0 18 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <path d="M10.3129 3.51886C10.3139 2.4957 8.22756 1.66699 5.65693 1.66699C3.0863 1.66699 1.00186 2.49663 1 3.51886M1 3.51886C1 4.54202 3.08444 5.37074 5.65693 5.37074C8.22942 5.37074 10.3139 4.54202 10.3139 3.51886L10.3139 10.7041M1 3.51886V14.63C1.00093 15.6532 3.08537 16.4819 5.65693 16.4819C6.90406 16.4819 8.0301 16.2847 8.86556 15.9671M1.00093 7.22259C1.00093 8.24575 3.08538 9.07446 5.65787 9.07446C8.23036 9.07446 10.3148 8.24575 10.3148 7.22259M8.92144 12.2458C8.08133 12.5746 6.92921 12.7783 5.65693 12.7783C3.08537 12.7783 1.00093 11.9495 1.00093 10.9264M15.606 11.2209C17.2424 12.8477 17.2424 15.4866 15.606 17.1135C13.9696 18.7404 11.3151 18.7404 9.67866 17.1135C8.04221 15.4866 8.04221 12.8477 9.67866 11.2209C11.3151 9.59399 13.9696 9.59399 15.606 11.2209Z" stroke="black" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
-      </svg>
+        <path d="M10.3129 3.51886C10.3139 2.4957 8.22756 1.66699 5.65693 1.66699C3.0863 1.66699 1.00186 2.49663 1 3.51886M1 3.51886C1 4.54202 3.08444 5.37074 5.65693 5.37074C8.22942 5.37074 10.3139 4.54202 10.3139 3.51886L10.3139 10.7041M1 3.51886V14.63C1.00093 15.6532 3.08537 16.4819 5.65693 16.4819C6.90406 16.4819 8.0301 16.2847 8.86556 15.9671M1.00093 7.22259C1.00093 8.24575 3.08538 9.07446 5.65787 9.07446C8.23036 9.07446 10.3148 8.24575 10.3148 7.22259M8.92144 12.2458C8.08133 12.5746 6.92921 12.7783 5.65693 12.7783C3.08537 12.7783 1.00093 11.9495 1.00093 10.9264M15.606 11.2209C17.2424 12.8477 17.2424 15.4866 15.606 17.1135C13.9696 18.7404 11.3151 18.7404 9.67866 17.1135C8.04221 15.4866 8.04221 12.8477 9.67866 11.2209C11.3151 9.59399 13.9696 9.59399 15.606 11.2209Z" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+      </svg>,
+      selected: "Yes"
     },
 
     {
@@ -95,10 +85,22 @@ const Category = () => {
       icon: <svg width="19" height="20" viewBox="0 0 19 20" fill="none" xmlns="http://www.w3.org/2000/svg">
         <path d="M9.49984 18.3337C14.1022 18.3337 17.8332 14.6027 17.8332 10.0003C17.8332 5.39795 14.1022 1.66699 9.49984 1.66699C4.89746 1.66699 1.1665 5.39795 1.1665 10.0003C1.1665 14.6027 4.89746 18.3337 9.49984 18.3337Z" stroke="#344054" stroke-width="1.67" stroke-linecap="round" stroke-linejoin="round" />
         <path d="M13.0332 6.46699L11.2665 11.767L5.9665 13.5337L7.73317 8.23366L13.0332 6.46699Z" stroke="#344054" stroke-width="1.67" stroke-linecap="round" stroke-linejoin="round" />
-      </svg>
+      </svg>,
+      selected: "No"
 
     }
   ]
+
+  // const plot = [apiCategoryData?.trend_analysis?.search.toString().split('')]
+  // console.log("plot", plot)
+
+
+  const seriesNumber = apiCategoryData?.trend_analysis?.search;
+  console.log("searchSeries", seriesNumber)
+
+  const seriesCart = apiCategoryData?.trend_analysis?.add_to_cart;
+  const seriesWishlist = apiCategoryData?.trend_analysis?.add_to_wishlist;
+
 
   return (
     <section>
@@ -116,7 +118,7 @@ const Category = () => {
 
       <div className="my-4">
         <div className='py-4'>
-          <div className="flex items-center justify-center gap-4">
+          <div className="flex items-center justify-center gap-4" onClick={handleCategoryAPI}>
             {['Travel', 'Accomodation', 'Grocery', 'Food', 'Electronics'].map((title, index) => (
               <DropdownFour
                 key={index}
@@ -152,7 +154,7 @@ const Category = () => {
 
           <div className='pt-4 flex items-center'>
             {AgentNavigation.map((item, index) => (
-              <div key={index} className='flex items-center gap-2 border-2 border-gray-300 py-2 px-11 rounded-lg'>
+              <div key={index} className={item.selected === "No" ? 'flex items-center gap-2 border-2 border-gray-300 py-2 px-11 rounded-lg' : 'flex items-center gap-2 bg-blue-600 scale-110 text-white py-2 px-11 rounded-lg'}>
                 <div>{item.icon}</div>
                 <p>{item.name}</p>
               </div>
@@ -165,13 +167,15 @@ const Category = () => {
           <div className='absolute right-8 flex items-center gap-3 bottom-1/2 top-1/2'>
             <img className='cursor-pointer' src={Mic} alt="mic" />
             <img className='cursor-pointer' src={Send} alt="send" />
-            <img className='cursor-pointer' src={Whatsapp} alt="whatsapp" />
+            <Link target='_blank' to={'https://wa.link/8vliis'}>
+              <img className='cursor-pointer' src={Whatsapp} alt="whatsapp" />
+            </Link>
           </div>
         </form>
       </div>
 
       <div className='flex gap-6 mx-8 pt-12'>
-        <Box heading={'Total Earnings'} text={'1,720'} svg={<svg width="52" height="52" viewBox="0 0 52 52" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <Box heading={'Search'} text={apiCategoryData?.trend_analysis?.Num_of_search} svg={<svg width="52" height="52" viewBox="0 0 52 52" fill="none" xmlns="http://www.w3.org/2000/svg">
           <g filter="url(#filter0_d_6696_2062)">
             <rect x="2" y="1" width="48" height="48" rx="10" fill="white" />
             <rect x="2.5" y="1.5" width="47" height="47" rx="9.5" stroke="#EAECF0" />
@@ -192,7 +196,7 @@ const Category = () => {
           </defs>
         </svg>} />
 
-        <Box heading={'Total orders'} text={'1,720'} svg={<svg width="53" height="52" viewBox="0 0 53 52" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <Box heading={'Add to Cart'} text={apiCategoryData?.trend_analysis?.Num_of_add_to_cart} svg={<svg width="53" height="52" viewBox="0 0 53 52" fill="none" xmlns="http://www.w3.org/2000/svg">
           <g filter="url(#filter0_d_6696_2107)">
             <rect x="2.6665" y="1" width="48" height="48" rx="10" fill="white" />
             <rect x="3.1665" y="1.5" width="47" height="47" rx="9.5" stroke="#EAECF0" />
@@ -212,7 +216,7 @@ const Category = () => {
         </svg>
         } />
 
-        <Box heading={'Average Order Value'} text={'1,720'} svg={<svg width="53" height="52" viewBox="0 0 53 52" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <Box heading={'Add to Wishlist'} text={apiCategoryData?.trend_analysis?.Num_of_add_to_wishlist} svg={<svg width="53" height="52" viewBox="0 0 53 52" fill="none" xmlns="http://www.w3.org/2000/svg">
           <g filter="url(#filter0_d_6696_3978)">
             <rect x="2.3335" y="1" width="48" height="48" rx="10" fill="white" />
             <rect x="2.8335" y="1.5" width="47" height="47" rx="9.5" stroke="#EAECF0" />
@@ -231,118 +235,23 @@ const Category = () => {
           </defs>
         </svg>} />
       </div>
+      {/* <p>[{apiCategoryData?.trend_analysis?.search.toString().split('')}]</p> */}
 
-      <div className='w-full h-fit px-8 grid grid-cols-2'>
-        <InsightChart />
-        <InsightChart />
-        <InsightChart />
-        <InsightChart />
+      <div className='w-full pt-16 h-fit px-8 grid grid-cols-2 gap-y-16'>
+        <div>
+          <p className='text-2xl font-semibold pl-8'>Search</p>
+          <InsightChart seriesName={"Search"} seriesData={seriesNumber} />
+        </div>
+        <div>
+          <p className='text-2xl font-semibold pl-8'>Add to Cart</p>
+          <InsightChart seriesName={"Add to Cart"} seriesData={seriesCart} />
+        </div>
+        <div>
+          <p className='text-2xl font-semibold pl-8'>Add to Wishlist</p>
+          <InsightChart seriesname={"Add to Wishlist"} seriesData={seriesWishlist} />
+        </div>
+
       </div>
-
-      {/* <div className='pt-10 flex justify-between gap-8'>
-        <StatBoxes heading={'Marketing Agent'} cost={'Lets you stay on top of the trends by enabling Marketing copilot'} bg={'bg-[#FFFDC4]'} label={'Buyer & Seller apps'} labelTextColor={'text-[#027A48]'} labelBg={'bg-[#ECFDF3]'} dot={'#12B76A'} />
-
-        <StatBoxes heading={'Cost optimization Agent'} cost={'Optimizes various costs for your sales pipeline'} bg={'bg-[#C0FFE2]'} label={'Seller apps'} labelTextColor={'text-[#6941C6]'} labelBg={'bg-[#F9F5FF]'} dot={'#9E77ED'} />
-
-        <StatBoxes heading={'Recommender Agent'} cost={'Personalizes your catalog by matching with market baselines'} bg={'bg-[#D2EDFF]'}
-          label={'Buyer & Seller apps'} labelTextColor={'text-[#027A48]'} labelBg={'bg-[#ECFDF3]'} dot={'#12B76A'}
-        />
-      </div> */}
-
-      {/* {apiCategoryData.length == null ?
-        <>
-          <div className='pt-6'>
-            <Charts />
-          </div>
-
-          <div className="info-container">
-            <Swiper
-              modules={[Pagination]}
-              pagination={{
-                clickable: true
-              }}
-              className='mySwiper '
-              style={{ '--swiper-pagination-color': 'red' }}
-              autoplay={{
-                delay: 2000,
-                disableOnInteraction: false,
-              }}
-              slidesPerView={3}
-              spaceBetween={30}
-            >
-              {Object.entries(apiCategoryData).map(([pincode, categories]) => (
-                <SwiperSlide>
-                  <div key={pincode} className="pincode-container">
-
-                    {Object.entries(categories).map(([category, actions]) => (
-                      <div key={category} className="pincode-info-container">
-                        <div className="pincode-headings-container">
-                          <h3 className="pincode-headings">{pincode}</h3>
-                        </div>
-                        <ul className="category-card-container card-container">
-                          {Object.entries(actions).map(([action, products]) => (
-                            <div className="category-action-container" key={action}>
-                              <p className="category-action action-name">
-                                {action}
-                              </p>
-                              <ul className="product-list">
-                                {Object.entries(products).map(
-                                  ([productName, count]) => (
-                                    <li
-                                      key={productName}
-                                      className="category-product-item product-item"
-                                    >
-                                      <li className="category-product-name">
-                                        {productName}
-                                      </li>
-                                      <li>{count}</li>
-                                    </li>
-                                  )
-                                )}
-                              </ul>
-                            </div>
-                          ))}
-                        </ul>
-                      </div>
-                    ))}
-
-                  </div>
-                </SwiperSlide>
-              ))}
-              <div className="swiper-button-next"></div>
-              <div className="swiper-button-prev"></div>
-            </Swiper>
-          </div>
-        </>
-        :
-        <form onSubmit={handleCategorySubmit}>
-          <div className="category-container form-container">
-            <div className="category-input-container form-input-containers">
-
-              <select
-                className="input"
-                id="category"
-                type="text"
-                required
-                value={category}
-                onChange={(e) => setCategory(e.target.value)}
-              >
-                <option value="" disabled selected hidden>
-                  Select Category
-                </option>
-                {categories.map((category, index) => (
-                  <option key={index} value={category}>
-                    {category}
-                  </option>
-                ))}
-              </select>
-            </div>
-            <button className="form-button" type="submit">
-              Fetch Data
-            </button>
-          </div>
-        </form>
-      } */}
 
     </section>
   )

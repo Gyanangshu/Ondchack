@@ -14,8 +14,8 @@ const Box = (props) => {
             </div>
 
             <div className='pt-6 flex flex-col gap-3'>
-                <p className='text-4xl font-semibold'>₹{props.text}</p>
-                <p className=''>40% <span className='text-[#667085] text-sm'>vs last month</span></p>
+                <p className='text-4xl font-semibold'>{props.text}</p>
+                {/* <p className=''>40% <span className='text-[#667085] text-sm'>vs last month</span></p> */}
             </div>
         </div>
     )

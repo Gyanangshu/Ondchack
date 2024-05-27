@@ -50,7 +50,7 @@ const Dashboard = () => {
                 </svg>
             ,
             component: Home
-        },
+        }, 
 
         {
             OptionName: 'Trend Analysis',
@@ -124,7 +124,7 @@ const Dashboard = () => {
                         <div className='flex justify-between md:justify-left items-center w-full pt-3'>
                             <img className='h-12 px-4' src={NavLogo} alt="axai" />
 
-                            <svg onClick={() => setCollapseMenu(!collapseMenu)} xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="white" className="w-6 h-6 relative mb-4 block md:hidden">
+                            <svg onClick={() => setCollapseMenu(!collapseMenu)} xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="#4B4B4B" className="w-6 h-6 relative mb-4 block md:hidden">
                                 <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
                             </svg>
                         </div>
@@ -133,7 +133,7 @@ const Dashboard = () => {
                             {MenuOptions.map((item, index) => (
                                 <li onClick={() => handleSidebar(item.OptionName)} key={index} className={`hover:transition-all duration-300 ease-in-out rounded-lg flex items-center gap-3 ${activeMenu === item.OptionName ? 'bg-[#dee5f9] py-3 px-4' : 'py-3 px-4'}`}>
                                     {item.optionIcon}
-                                    <p className='text-[#4B4B4B] text-lg font-semibold'>{item.OptionName}</p>
+                                    <p className='text-[#4B4B4B] text-lg font-semibold text-nowrap'>{item.OptionName}</p>
                                 </li>
                             ))}
                         </ul>
@@ -144,7 +144,7 @@ const Dashboard = () => {
                             {MenuBottomOptions.map((item, index) => (
                                 <li key={index} onClick={() => handleSidebar(item.optionBottomName)} className={`flex items-center gap-3 px-3 py-3 rounded-xl hover:transition-all delay-75 ease-in-out ${activeMenu === item.optionBottomName ? 'bg-[#dee5f9] py-3 px-4' : 'py-3 px-4'}`}>
                                     <img src={item.optionBottomIcon} alt="icon" />
-                                    <p className='text-[#4B4B4B] text-lg font-semibold'>{item.optionBottomName}</p>
+                                    <p className='text-[#4B4B4B] text-lg font-semibold text-nowrap'>{item.optionBottomName}</p>
                                 </li>
                             ))}
 
@@ -172,15 +172,15 @@ const Dashboard = () => {
                 </div>
 
                 :
-                <div className='w-12 pt-6 bg-[#1E232F] transition-all duration-300 ease-in-out flex flex-col items-center gap-10'>
-                    <svg onClick={() => setCollapseMenu(!collapseMenu)} xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="white" className="w-6 h-6 relative">
+                <div className='w-12 pt-6 border-r border-gray-300 transition-all duration-300 ease-in-out flex flex-col items-center gap-10'>
+                    <svg onClick={() => setCollapseMenu(!collapseMenu)} xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="#4B4B4B" className="w-6 h-6 relative">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
                     </svg>
 
                     <div className='flex flex-col justify-between h-full'>
                         <ul className='list-none text-white cursor-pointer flex flex-col gap-4 w-fit '>
                             {MenuOptions.map((item, index) => (
-                                <li onClick={() => handleSidebar(item.OptionName)} key={index} className={`hover:transition-all duration-300 ease-in-out rounded-lg flex items-center gap-3 ${activeMenu === item.OptionName ? 'bg-[#3a5997] py-3 px-4' : 'py-3 px-4'}`}>
+                                <li onClick={() => handleSidebar(item.OptionName)} key={index} className={`hover:transition-all duration-300 ease-in-out rounded-lg flex items-center gap-3 ${activeMenu === item.OptionName ? 'bg-[#dee5f9] py-3 px-4' : 'py-3 px-4'}`}>
                                     {item.optionIcon}
                                 </li>
                             ))}
@@ -188,7 +188,7 @@ const Dashboard = () => {
                         <div className='flex flex-col gap-3'>
                             <ul className='list-none text-white cursor-pointer flex flex-col gap-4'>
                                 {MenuBottomOptions.map((item, index) => (
-                                    <li key={index} onClick={() => handleSidebar(item.optionBottomName)} className={`flex items-center gap-3 px-3 py-3 rounded-xl hover:transition-all delay-75 ease-in-out ${activeMenu === item.optionBottomName ? 'bg-[#3a5997] py-3 px-4' : 'py-3 px-4'}`}>
+                                    <li key={index} onClick={() => handleSidebar(item.optionBottomName)} className={`flex items-center gap-3 px-3 py-3 rounded-xl hover:transition-all delay-75 ease-in-out ${activeMenu === item.optionBottomName ? 'bg-[#dee5f9] py-3 px-4' : 'py-3 px-4'}`}>
                                         <img src={item.optionBottomIcon} alt="icon" />
                                     </li>
                                 ))}

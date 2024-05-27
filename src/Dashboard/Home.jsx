@@ -8,29 +8,33 @@ import Mic from "../Images/microphone-2.svg";
 import Send from "../Images/send.svg";
 import Whatsapp from "../Images/whatsapp.svg";
 import AreaGraph from '../UI/AreaGraph';
+import axios from 'axios';
 
 const Home = () => {
 
     const { user } = UserAuth();
     const [userData, setUserData] = useState([]);
-    const [categoryOption, setCategoryOption] = useState('');
-    const [selectedOption, setSelectedOption] = useState([500, 300, 200]);
-    const [colors, setColors] = useState('')
+    const [homeApiData, setHomeApiData] = useState([]);
+    const [isLoading, setIsLoading] = useState(false)
 
-    const handleDropdownChange = (event) => {
-        setCategoryOption(event.target.value)
-        const value = event.target.value;
-        if (value === 'Electronics') {
-            setSelectedOption([500, 300, 200]);
-            setColors(['#3E86F0']);
-        } else if (value === 'Home Appliances') {
-            setSelectedOption([400, 250, 150]);
-            setColors(['#d46f0b']);
-        } else if (value === 'Fashion') {
-            setSelectedOption([350, 200, 120]);
-            setColors(['#A020F0']);
-        }
-    };
+    // const [categoryOption, setCategoryOption] = useState('');
+    // const [selectedOption, setSelectedOption] = useState([500, 300, 200]);
+    // const [colors, setColors] = useState('')
+
+    // const handleDropdownChange = (event) => {
+    //     setCategoryOption(event.target.value)
+    //     const value = event.target.value;
+    //     if (value === 'Electronics') {
+    //         setSelectedOption([500, 300, 200]);
+    //         setColors(['#3E86F0']);
+    //     } else if (value === 'Home Appliances') {
+    //         setSelectedOption([400, 250, 150]);
+    //         setColors(['#d46f0b']);
+    //     } else if (value === 'Fashion') {
+    //         setSelectedOption([350, 200, 120]);
+    //         setColors(['#A020F0']);
+    //     }
+    // };
 
     // const handleCategoryOption = (e) => {
     //     setCategoryOption(e.target.value)
@@ -47,12 +51,10 @@ const Home = () => {
                 } else {
                     // console.log("No document found")
                 }
-
             } catch (err) {
                 // console.log(err)
             }
         }
-
         fetchUserData();
     }, [user])
 
@@ -62,21 +64,23 @@ const Home = () => {
         { label: 'Total Purchases', value: 600, color: '#FF6347' },
     ];
 
-    const maxValue = Math.max(...data.map((item) => item.value));
+    // const maxValue = Math.max(...data.map((item) => item.value));
 
     const AgentNavigation = [
         {
             name: 'Marketing Agent',
             icon: <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path d="M15 2.5C14.337 2.5 13.7011 2.76339 13.2322 3.23223C12.7634 3.70107 12.5 4.33696 12.5 5V15C12.5 15.663 12.7634 16.2989 13.2322 16.7678C13.7011 17.2366 14.337 17.5 15 17.5C15.663 17.5 16.2989 17.2366 16.7678 16.7678C17.2366 16.2989 17.5 15.663 17.5 15C17.5 14.337 17.2366 13.7011 16.7678 13.2322C16.2989 12.7634 15.663 12.5 15 12.5H5C4.33696 12.5 3.70107 12.7634 3.23223 13.2322C2.76339 13.7011 2.5 14.337 2.5 15C2.5 15.663 2.76339 16.2989 3.23223 16.7678C3.70107 17.2366 4.33696 17.5 5 17.5C5.66304 17.5 6.29893 17.2366 6.76777 16.7678C7.23661 16.2989 7.5 15.663 7.5 15V5C7.5 4.33696 7.23661 3.70107 6.76777 3.23223C6.29893 2.76339 5.66304 2.5 5 2.5C4.33696 2.5 3.70107 2.76339 3.23223 3.23223C2.76339 3.70107 2.5 4.33696 2.5 5C2.5 5.66304 2.76339 6.29893 3.23223 6.76777C3.70107 7.23661 4.33696 7.5 5 7.5H15C15.663 7.5 16.2989 7.23661 16.7678 6.76777C17.2366 6.29893 17.5 5.66304 17.5 5C17.5 4.33696 17.2366 3.70107 16.7678 3.23223C16.2989 2.76339 15.663 2.5 15 2.5Z" stroke="#344054" stroke-width="1.67" stroke-linecap="round" stroke-linejoin="round" />
-            </svg>
+            </svg>,
+            selected: "No"
         },
 
         {
             name: 'Pricing Agent',
             icon: <svg width="18" height="22" viewBox="0 0 18 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M10.3129 3.51886C10.3139 2.4957 8.22756 1.66699 5.65693 1.66699C3.0863 1.66699 1.00186 2.49663 1 3.51886M1 3.51886C1 4.54202 3.08444 5.37074 5.65693 5.37074C8.22942 5.37074 10.3139 4.54202 10.3139 3.51886L10.3139 10.7041M1 3.51886V14.63C1.00093 15.6532 3.08537 16.4819 5.65693 16.4819C6.90406 16.4819 8.0301 16.2847 8.86556 15.9671M1.00093 7.22259C1.00093 8.24575 3.08538 9.07446 5.65787 9.07446C8.23036 9.07446 10.3148 8.24575 10.3148 7.22259M8.92144 12.2458C8.08133 12.5746 6.92921 12.7783 5.65693 12.7783C3.08537 12.7783 1.00093 11.9495 1.00093 10.9264M15.606 11.2209C17.2424 12.8477 17.2424 15.4866 15.606 17.1135C13.9696 18.7404 11.3151 18.7404 9.67866 17.1135C8.04221 15.4866 8.04221 12.8477 9.67866 11.2209C11.3151 9.59399 13.9696 9.59399 15.606 11.2209Z" stroke="black" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
-            </svg>
+                <path d="M10.3129 3.51886C10.3139 2.4957 8.22756 1.66699 5.65693 1.66699C3.0863 1.66699 1.00186 2.49663 1 3.51886M1 3.51886C1 4.54202 3.08444 5.37074 5.65693 5.37074C8.22942 5.37074 10.3139 4.54202 10.3139 3.51886L10.3139 10.7041M1 3.51886V14.63C1.00093 15.6532 3.08537 16.4819 5.65693 16.4819C6.90406 16.4819 8.0301 16.2847 8.86556 15.9671M1.00093 7.22259C1.00093 8.24575 3.08538 9.07446 5.65787 9.07446C8.23036 9.07446 10.3148 8.24575 10.3148 7.22259M8.92144 12.2458C8.08133 12.5746 6.92921 12.7783 5.65693 12.7783C3.08537 12.7783 1.00093 11.9495 1.00093 10.9264M15.606 11.2209C17.2424 12.8477 17.2424 15.4866 15.606 17.1135C13.9696 18.7404 11.3151 18.7404 9.67866 17.1135C8.04221 15.4866 8.04221 12.8477 9.67866 11.2209C11.3151 9.59399 13.9696 9.59399 15.606 11.2209Z" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+            </svg>,
+            selected: "Yes"
         },
 
         {
@@ -84,7 +88,8 @@ const Home = () => {
             icon: <svg width="19" height="20" viewBox="0 0 19 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path d="M9.49984 18.3337C14.1022 18.3337 17.8332 14.6027 17.8332 10.0003C17.8332 5.39795 14.1022 1.66699 9.49984 1.66699C4.89746 1.66699 1.1665 5.39795 1.1665 10.0003C1.1665 14.6027 4.89746 18.3337 9.49984 18.3337Z" stroke="#344054" stroke-width="1.67" stroke-linecap="round" stroke-linejoin="round" />
                 <path d="M13.0332 6.46699L11.2665 11.767L5.9665 13.5337L7.73317 8.23366L13.0332 6.46699Z" stroke="#344054" stroke-width="1.67" stroke-linecap="round" stroke-linejoin="round" />
-            </svg>
+            </svg>,
+            selected: "No"
 
         }
     ]
@@ -120,6 +125,43 @@ const Home = () => {
         }
     ]
 
+    useEffect(() => {
+        const handleHomeApi = async () => {
+            setIsLoading(true)
+            try {
+                const response = await axios.post("https://ondcapi.axai.ai/v1/ondc/insight", {
+                    source: "",
+                    destination: "",
+                    carrier: "",
+                    event: '',
+                    query: ''
+                }, {
+                    withCredentials: false,
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Access-Control-Allow-Origin': '*',
+                    }
+                })
+                setHomeApiData(response.data)
+
+            } catch (err) {
+                console.log(err.response)
+            } finally {
+                setIsLoading(false)
+            }
+        }
+
+        handleHomeApi()
+    }, [])
+
+
+    console.log(homeApiData?.trend_analysis?.Num_of_add_to_cart)
+    const seriesSearch = homeApiData?.trend_analysis?.search;
+    const seriesWishlist = homeApiData?.trend_analysis?.add_to_wishlist;
+    const seriesCart = homeApiData?.trend_analysis?.add_to_cart;
+
+    console.log("SeriesNumber", seriesSearch)
+
     return (
         <section>
             {[userData].map((item, index) => (
@@ -143,7 +185,7 @@ const Home = () => {
 
                     <div className='pt-4 flex items-center'>
                         {AgentNavigation.map((item, index) => (
-                            <div key={index} className='flex items-center gap-2 border-2 border-gray-300 py-2 px-11 rounded-lg'>
+                            <div key={index} className={item.selected === "No" ? 'flex items-center gap-2 border-2 border-gray-300 py-2 px-11 rounded-lg' : 'flex items-center gap-2 bg-blue-600 scale-110 text-white py-2 px-11 rounded-lg'}>
                                 <div>{item.icon}</div>
                                 <p>{item.name}</p>
                             </div>
@@ -178,49 +220,71 @@ const Home = () => {
                 <p className='text-[#101828] text-3xl'>Network Activity</p>
 
                 <div className='flex items-center gap-6 py-6'>
-                    <div className='bg-white rounded-lg p-6 border-2 border-[#F0F0F0] flex-grow'>
-                        <p className='font-medium text-lg'>Added in cart</p>
 
-                        <div className='pt-4 flex items-center justify-between'>
-                            <div className='flex flex-col gap-4'>
-                                <p className='text-[#101828] text-4xl font-semibold'>2,420</p>
-                                <p className='text-sm text-nowrap'>
+                    <div className='bg-white rounded-lg p-6 border-2 border-[#F0F0F0] flex-grow'>
+                        <p className='font-semibold text-lg'>Searches</p>
+
+                        {isLoading ?
+                            <div className='mt-3'>
+                                <div className='spinner' />
+                            </div>
+                            :
+                            <div className='pt-4 flex items-center justify-between'>
+                                <div className='flex flex-col gap-4'>
+                                    <p className='text-[#101828] text-4xl font-semibold'>{homeApiData?.trend_analysis?.Num_of_search}</p>
+                                    {/* <p className='text-sm text-nowrap'>
                                     40%
                                     <span className='text-[#667085] ml-2'>vs last month</span>
-                                </p>
+                                </p> */}
+                                </div>
+                                <AreaGraph seriesName={"Search"} seriesData={seriesSearch} />
                             </div>
-                            <AreaGraph />
-                        </div>
+                        }
+
                     </div>
 
                     <div className='bg-white rounded-lg p-6 border-2 border-[#F0F0F0] flex-grow'>
-                        <p className='font-medium text-lg'>Searches</p>
+                        <p className='font-semibold text-lg'>Added in cart</p>
 
-                        <div className='pt-4 flex items-center justify-between'>
-                            <div className='flex flex-col gap-4'>
-                                <p className='text-[#101828] text-4xl font-semibold'>10,210</p>
-                                <p className='text-sm text-nowrap'>
+                        {isLoading ?
+                            <div className='mt-3'>
+                                <div className='spinner' />
+                            </div>
+                            :
+                            <div className='pt-4 flex items-center justify-between'>
+                                <div className='flex flex-col gap-4'>
+                                    <p className='text-[#101828] text-4xl font-semibold'>{homeApiData?.trend_analysis?.Num_of_add_to_cart}</p>
+                                    {/* <p className='text-sm text-nowrap'>
                                     40%
                                     <span className='text-[#667085] ml-2'>vs last month</span>
-                                </p>
+                                </p> */}
+                                </div>
+                                <AreaGraph seriesName={"Add to cart"} seriesData={seriesCart} />
                             </div>
-                            <AreaGraph />
-                        </div>
+                        }
+
                     </div>
 
                     <div className='bg-white rounded-lg p-6 border-2 border-[#F0F0F0] flex-grow'>
-                        <p className='font-medium text-lg'>Active now</p>
+                        <p className='font-semibold text-lg'>Add to Wishlist</p>
 
-                        <div className='pt-4 flex items-center justify-between'>
-                            <div className='flex flex-col gap-4'>
-                                <p className='text-[#101828] text-4xl font-semibold'>316</p>
-                                <p className='text-sm text-nowrap'>
+                        {isLoading ?
+                            <div className='mt-3'>
+                                <div className='spinner' />
+                            </div>
+                            :
+                            <div className='pt-4 flex items-center justify-between'>
+                                <div className='flex flex-col gap-4'>
+                                    <p className='text-[#101828] text-4xl font-semibold'>{homeApiData?.trend_analysis?.Num_of_add_to_wishlist}</p>
+                                    {/* <p className='text-sm text-nowrap'>
                                     40%
                                     <span className='text-[#667085] ml-2'>vs last month</span>
-                                </p>
+                                </p> */}
+                                </div>
+                                <AreaGraph seriesName={"Add to Wishlist"} seriesData={seriesWishlist} />
                             </div>
-                            <AreaGraph />
-                        </div>
+                        }
+
                     </div>
                 </div>
             </div>

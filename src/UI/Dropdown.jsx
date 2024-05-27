@@ -3,11 +3,20 @@ import React, { useState } from 'react';
 const Dropdown = ({ title, selectedOption, handleSelect, isOpen, setOpenDropdown }) => {
 
     const options = {
-        Travel: ['Flight', 'Option 1'],
-        Accomodation: ['Accomodation', 'Option 2'],
-        Grocery: ['Grocery', 'Option 3'],
-        Food: ['Food', 'Option 4'],
-        Electronics: ['Electronics', 'Option 5'],
+        Travel: ['Flight', 'Cabs', "Autos", "Buses", "Metro"],
+        Accomodation: ['Hotel', 'Homestay'],
+        Grocery: [],
+        Food: [],
+        Electronics: [],
+    }[title];
+
+    // List of disabled options
+    const disabledOptions = {
+        Travel: [ 'Cabs', "Autos", "Buses", "Metro"],
+        Accomodation: ['Hotel', 'Homestay'],
+        Grocery: [],
+        Food: [],
+        Electronics: [],
     }[title];
 
     return (
@@ -30,23 +39,26 @@ const Dropdown = ({ title, selectedOption, handleSelect, isOpen, setOpenDropdown
 
             {isOpen && (
                 <div className="absolute left-0 top-full mt-1 bg-white border border-gray-300 rounded-md shadow-lg w-40 z-10">
-                    {options.map((option, index) => (
-                        <div
-                            key={index}
-                            className={`cursor-pointer p-2 ${selectedOption === option ? 'bg-blue-500 text-white rounded-sm' : 'hover:bg-[#dee5f9]'}`}
-                            onClick={() => {
-                                if (selectedOption !== option) {
-                                    handleSelect(option);
-                                }
-                            }}
-                        >
-                            {option}
-                        </div>
-                    ))}
+                    {options.map((option, index) => {
+                        const isDisabled = disabledOptions.includes(option);
+                        return (
+                            <div
+                                key={index}
+                                className={`cursor-pointer p-2 ${selectedOption === option ? 'bg-blue-500 text-white rounded-sm' : 'hover:bg-[#dee5f9]'} ${isDisabled ? 'cursor-not-allowed text-gray-400' : ''}`}
+                                onClick={() => {
+                                    if (!isDisabled) {
+                                        handleSelect(option);
+                                    }
+                                }}
+                            >
+                                {option}
+                            </div>
+                        );
+                    })}
                 </div>
             )}
         </div>
-    );
+    )
 };
 
 export default Dropdown;
