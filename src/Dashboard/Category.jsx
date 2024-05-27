@@ -24,6 +24,9 @@ const Category = () => {
   const [selectedOptions, setSelectedOptions] = useState({});
   const [openDropdown, setOpenDropdown] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
+  const [isPilotLoading, setIsPilotLoading] = useState(false)
+  const [copilotData, setCopilotData] = useState([]);
+  const [userPrompt, setUserPrompt] = useState('');
 
   const handleSelect = (dropdown, option) => {
     setSelectedOptions({ [dropdown]: option });
@@ -60,6 +63,37 @@ const Category = () => {
       setIsLoading(false)
     }
   }
+
+  const handleCopilotApi = async () => {
+    setIsPilotLoading(true)
+    try {
+      const response = await axios.post("https://ondcapi.axai.ai/v1/ondc/insight", {
+        source: "",
+        destination: "",
+        carrier: "",
+        event: '',
+        query: userPrompt ? userPrompt : ''
+      }, {
+        withCredentials: false,
+        headers: {
+          'Content-Type': 'application/json',
+          'Access-Control-Allow-Origin': '*',
+        }
+      })
+      setCopilotData(response.data)
+      console.log("APi is running")
+
+    } catch (err) {
+      console.log(err.response)
+    } finally {
+      setIsPilotLoading(false)
+    }
+  }
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    handleCopilotApi(); // Call the API when the form is submitted
+  };
 
   console.log("Trend data", apiCategoryData);
 
@@ -162,11 +196,48 @@ const Category = () => {
           </div>
         </div>
 
-        <form className='bg-white p-2 rounded-[40px] w-full lg:w-1/2 relative'>
-          <input type="text" className='w-full rounded-[40px] px-8 py-5 border-2 border-[#F0F0F0] outline-2 outline-[#bac5e3]' placeholder='Start a conversation...' />
-          <div className='absolute right-8 flex items-center gap-3 bottom-1/2 top-1/2'>
+        <div className='w-2/3 pb-6 mx-auto'>
+          {isPilotLoading ?
+            <div className='flex justify-center items-center h-full w-full bg-white border-2 border-gray-200 shadow-sm p-4 rounded-lg'>
+              <div className='spinner' />
+            </div>
+            :
+            <div>
+              {copilotData?.llm_output ?
+                <div className='bg-white w-full py-4 px-6 rounded-lg'>
+                  <p className='text-lg'>{copilotData?.llm_output?.justification}</p>
+                  <div className='py-2 flex items-center gap-4'>
+                    <div className='border-2 border-gray-200 py-2 px-3 w-fit'>
+                      <p className='font-semibold'>Discount</p>
+                      <p className='text-2xl font-semibold pt-3'>{copilotData?.llm_output?.optimal_discount}%</p>
+                    </div>
+
+                    <div className='border-2 border-gray-200 py-2 px-3 w-fit'>
+                      <p className='font-semibold'>Profit</p>
+                      <p className='text-2xl font-semibold pt-3'>{copilotData?.llm_output?.predicted_profit}%</p>
+                    </div>
+                  </div>
+                </div>
+                :
+                <div className='hidden'></div>
+              }
+            </div>
+          }
+        </div>
+
+        <form className='bg-white p-2 rounded-[40px] w-full lg:w-1/2 relative' onSubmit={handleSubmit}>
+          <input
+            value={userPrompt}
+            onChange={(e) => setUserPrompt(e.target.value)}
+            type="text"
+            className='w-full rounded-[40px] px-8 py-5 pr-32 border-2 border-[#F0F0F0] outline-2 outline-[#bac5e3]' // Added pr-20 for padding-right
+            placeholder='Start a conversation...'
+          />
+          <div className='absolute right-8 flex items-center gap-3 transform -translate-y-1/2 top-1/2'>
             <img className='cursor-pointer' src={Mic} alt="mic" />
-            <img className='cursor-pointer' src={Send} alt="send" />
+            <button type='submit'>
+              <img className='cursor-pointer' src={Send} alt="send" />
+            </button>
             <Link target='_blank' to={'https://wa.link/8vliis'}>
               <img className='cursor-pointer' src={Whatsapp} alt="whatsapp" />
             </Link>
