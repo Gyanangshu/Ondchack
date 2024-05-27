@@ -248,7 +248,7 @@ const Category = () => {
         </div>
         <div>
           <p className='text-2xl font-semibold pl-8'>Add to Wishlist</p>
-          <InsightChart seriesname={"Add to Wishlist"} seriesData={seriesWishlist} />
+          <InsightChart seriesName={"Add to Wishlist"} seriesData={seriesWishlist} />
         </div>
 
       </div>
